@@ -13,6 +13,12 @@ import { toast } from '@/hooks/use-toast';
 
 const HERO_IMG =
   'https://cdn.poehali.dev/projects/14f0595a-0958-459c-8d44-548a5e00df61/files/c21759e8-a9ef-42e9-8848-17e64d7bcba9.jpg';
+const PORTRAIT_IMG =
+  'https://cdn.poehali.dev/projects/14f0595a-0958-459c-8d44-548a5e00df61/files/c676ff4c-c614-4fd4-af3a-fe610e2f1b69.jpg';
+const COUPLE_IMG =
+  'https://cdn.poehali.dev/projects/14f0595a-0958-459c-8d44-548a5e00df61/files/c923f453-43b7-4516-a4b3-3f5887483324.jpg';
+const BLOG_IMG =
+  'https://cdn.poehali.dev/projects/14f0595a-0958-459c-8d44-548a5e00df61/files/e0205650-3b7a-493c-a6b5-5147236e6504.jpg';
 
 const NAV = [
   { id: 'about', label: 'Об авторе' },
@@ -85,9 +91,9 @@ const REVIEWS = [
 ];
 
 const BLOG = [
-  { tag: 'Отношения', title: '5 фраз, которые разрушают близость', date: '28 июня 2026' },
-  { tag: 'Конфликты', title: 'Как ссориться и становиться ближе', date: '14 июня 2026' },
-  { tag: 'Доверие', title: 'Что делать после измены: первые шаги', date: '2 июня 2026' },
+  { tag: 'Отношения', title: '5 фраз, которые разрушают близость', date: '28 июня 2026', img: BLOG_IMG },
+  { tag: 'Конфликты', title: 'Как ссориться и становиться ближе', date: '14 июня 2026', img: COUPLE_IMG },
+  { tag: 'Доверие', title: 'Что делать после измены: первые шаги', date: '2 июня 2026', img: HERO_IMG },
 ];
 
 const FAQ = [
@@ -237,8 +243,13 @@ export default function Index() {
       <section id="about" className="py-24 bg-muted/50">
         <div className="container mx-auto px-5 grid lg:grid-cols-5 gap-12 items-center">
           <div className="lg:col-span-2">
-            <div className="rounded-[2rem] bg-gradient-to-br from-primary/15 to-accent/15 aspect-[4/5] flex items-center justify-center">
-              <Icon name="UserRound" size={110} className="text-primary/40" />
+            <div className="relative">
+              <div className="absolute -inset-4 rounded-[2.5rem] bg-accent/10 blur-2xl" />
+              <img
+                src={PORTRAIT_IMG}
+                alt="Анна Волкова"
+                className="relative rounded-[2rem] shadow-xl aspect-[4/5] w-full object-cover"
+              />
             </div>
           </div>
           <div className="lg:col-span-3">
@@ -304,14 +315,23 @@ export default function Index() {
             <p className="text-primary-foreground/70 font-medium mb-3">Подходы</p>
             <h2 className="font-display text-4xl sm:text-5xl">Научно обоснованные методы</h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {APPROACHES.map((a) => (
-              <div key={a.title} className="border-t border-primary-foreground/20 pt-6">
-                <Icon name={a.icon} size={32} className="mb-5" />
-                <h3 className="font-display text-2xl mb-3">{a.title}</h3>
-                <p className="text-primary-foreground/70">{a.desc}</p>
-              </div>
-            ))}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="rounded-[2rem] overflow-hidden shadow-2xl">
+              <img
+                src={COUPLE_IMG}
+                alt="Пара на сессии"
+                className="w-full aspect-[4/3] object-cover"
+              />
+            </div>
+            <div className="grid gap-8">
+              {APPROACHES.map((a) => (
+                <div key={a.title} className="border-t border-primary-foreground/20 pt-6">
+                  <Icon name={a.icon} size={32} className="mb-4" />
+                  <h3 className="font-display text-2xl mb-2">{a.title}</h3>
+                  <p className="text-primary-foreground/70">{a.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -357,8 +377,12 @@ export default function Index() {
                 key={b.title}
                 className="hover-lift group rounded-3xl bg-card border border-border overflow-hidden cursor-pointer"
               >
-                <div className="h-40 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                  <Icon name="BookOpen" size={44} className="text-primary/50" />
+                <div className="h-44 overflow-hidden">
+                  <img
+                    src={b.img}
+                    alt={b.title}
+                    className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
                 </div>
                 <div className="p-6">
                   <span className="text-xs font-medium text-accent uppercase tracking-wide">
